@@ -16,10 +16,12 @@ ext_list2 = ['.mp4','.mkv','.webm','.avi','.MP4','.MKV','.WEBM','.AVI']
 
 BGdir = os.path.join(os.path.dirname(curdir),'bg.png')
 myBG = Image.open(BGdir)
+if myBG.mode != 'RGB':
+    myBG = myBG.convert('RGB')
 myBG.save("bg.jpg")
 myBG.save("bg.jpeg")
 
-for (path, dir, files) in os.walk(songdir):
+for (path, dir, files) in tqdm(os.walk(songdir)):
     for filename in files:
         ext = os.path.splitext(filename)[-1]
         file_path = os.path.join(path, filename)
